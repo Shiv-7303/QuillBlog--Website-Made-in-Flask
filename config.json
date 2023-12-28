@@ -1,0 +1,11 @@
+{
+    "params":
+    {
+        "local_server":"True",
+        "local_uri":"mysql+pymysql://root:@localhost/quillblog",
+        "prod_uri": "mysql+pymysql://root:@localhost/quillblog",
+        "blog_name":"Quillblog",
+        "gmail_user": "pythontut23@gmail.com",
+        "gmail_password": "jovfzihgkwmhxvot"
+    }
+}
