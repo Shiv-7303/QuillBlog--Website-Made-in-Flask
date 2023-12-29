@@ -38,18 +38,29 @@ class Contact(db.Model):
     Name = db.Column(db.String(30), nullable=False)
     Email = db.Column(db.String(30), nullable=False)
     Message = db.Column(db.String(200), nullable=False)
+    
+class Post(db.Model):
+    sno = db.Column(db.Integer, primary_key=True)
+    Title = db.Column(db.String(30), nullable=False)
+    slug = db.Column(db.String(30), nullable=False)
+    sub_title = db.Column(db.String(100), nullable=False)
+    Content = db.Column(db.String(200), nullable=False)
+    Date = db.Column( nullable=True)
 
 
 # Define the home route
 @app.route("/")
 def home():
-    return render_template("home.html", home=True, params=params)
+    post = Post.query.filter_by().all()
+    print(post)
+    return render_template("home.html", home=True, params=params, posts = post)
 
 
 # Define the post route
-@app.route("/post")
-def post():
-    return render_template("post.html", params=params)
+@app.route("/post/<string:post_slug>")
+def post(post_slug):
+    post = Post.query.filter_by(slug = post_slug).first()
+    return render_template("post.html", params=params, post=post)
 
 
 # Define the about route
