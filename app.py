@@ -1,5 +1,5 @@
 # Import necessary modules
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 import json
 from flask_mail import Mail, Message
@@ -56,8 +56,17 @@ def home():
     return render_template("home.html", home=True, params=params, posts = post)
 
 # Define the login route
-@app.route("/dashboard")
+@app.route("/dashboard", methods = ["GET", "POST"])
 def dashboard():
+    if request.method == "POST":
+        email = request.form.get("email")
+        password = request.form.get("password")
+        if email != params["login_email"] and password != params['login_password']:
+            flash("Invalid Email or Password")
+            return render_template("login.html",params = params)
+
+        else:
+            return render_template("success.html")
     return render_template("login.html", params= params)
 
 
