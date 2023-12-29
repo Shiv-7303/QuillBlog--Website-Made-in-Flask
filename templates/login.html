@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{url_for('static',filename='css/output.css')}}"
+      rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sevillana&display=swap"
+      rel="stylesheet">
+    <title>Login</title>
+  </head>
+  <body>
+    <main
+      class="w-full  flex flex-col items-center justify-center bg-gray-50 sm:px-4">
+      <div class="w-full space-y-6 text-gray-600 sm:max-w-md">
+        <div class="text-center">
+
+          <div class="mt-5 space-y-2">
+            <h3 class="text-gray-800 text-2xl font-bold sm:text-3xl">
+              Log in to your account
+            </h3>
+            <p class>
+              Don't have an account?
+              <a
+                href="javascript:void(0)"
+                class="font-medium text-indigo-600 hover:text-indigo-500">Sign
+                up</a>
+            </p>
+          </div>
+        </div>
+        <div class="bg-white shadow p-4 py-6 space-y-8 sm:p-6 sm:rounded-lg">
+          <div class="grid grid-cols-2 gap-x-3">
+            <button
+              class="flex items-center justify-center py-2.5 border rounded-lg hover:bg-gray-50 duration-150 active:bg-gray-100">
+              <!-- Comment: Google Icon SVG here -->
+              <img
+                src="https://raw.githubusercontent.com/sidiDev/remote-assets/7cd06bf1d8859c578c2efbfda2c68bd6bedc66d8/google-icon.svg"
+                alt="Google"
+                class="w-5 h-5" />
+            </button>
+          
+            <button
+              class="flex items-center justify-center py-2.5 border rounded-lg hover:bg-gray-50 duration-150 active:bg-gray-100">
+              <!-- Comment: GitHub Icon SVG here -->
+              <img
+                src="https://raw.githubusercontent.com/sidiDev/remote-assets/0d3b55a09c6bb8155ca19f43283dc6d88ff88bf5/github-icon.svg"
+                alt="Github"
+                class="w-5 h-5" />
+            </button>
+          </div>
+          <div class="relative">
+            <span class="block w-full h-px bg-gray-300"></span>
+            <p
+              class="inline-block w-fit text-sm bg-white px-2 absolute -top-2 inset-x-0 mx-auto">
+              Or continue with
+            </p>
+          </div>
+          <form onSubmit="event.preventDefault()" class="space-y-5">
+            <div>
+              <label class="font-medium">Email</label>
+              <input
+                type="email"
+                required
+                class="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg" />
+            </div>
+            <div>
+              <label class="font-medium">Password</label>
+              <input
+                type="password"
+                required
+                class="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg" />
+            </div>
+            <button
+              class="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150">
+              Sign in
+            </button>
+            <div class="text-end">
+              <a href="javascript:void(0)" class="hover:text-indigo-600">Forgot
+                password?</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </body>
+  <footer class="w-full max-w-[85rem] bg-gray-50 px-4 sm:px-6 lg:px-8 mx-auto">
+    <!-- Grid -->
+    <div class="text-center">
+      <div>
+        <a class="flex-none text-xl font-semibold text-black dark:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#" aria-label="Brand">Brand</a>
+      </div>
+      <!-- End Col -->
+  
+      <div class="mb-4">
+        <p class="text-gray-500">We're part of the <a class="font-semibold text-blue-600 hover:text-blue-700 dark:text-blue-500 dark:hover:text-blue-400" href="#">{{params['blog_name']}}</a> family.</p>
+        <p class="text-gray-500">© {{params['blog_name']}}. 2024. All rights reserved.</p>
+      </div>
+  
+
+    </div>
+    <!-- End Grid -->
+  </footer>
+</html>

@@ -45,6 +45,7 @@ class Post(db.Model):
     slug = db.Column(db.String(30), nullable=False)
     sub_title = db.Column(db.String(100), nullable=False)
     Content = db.Column(db.String(200), nullable=False)
+    img_file = db.Column(db.String(50), nullable=True)
     Date = db.Column( nullable=True)
 
 
@@ -52,8 +53,12 @@ class Post(db.Model):
 @app.route("/")
 def home():
     post = Post.query.filter_by().all()
-    print(post)
     return render_template("home.html", home=True, params=params, posts = post)
+
+# Define the login route
+@app.route("/dashboard")
+def dashboard():
+    return render_template("login.html", params= params)
 
 
 # Define the post route
