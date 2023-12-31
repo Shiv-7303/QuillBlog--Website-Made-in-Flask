@@ -1,5 +1,5 @@
 # Import necessary modules
-from flask import Flask, render_template,session, url_for, request, redirect, flash
+from flask import Flask, render_template, session, url_for, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 import json
 from flask_mail import Mail, Message
@@ -11,7 +11,7 @@ with open("config.json") as file:
 local_server = True
 # Create Flask app instance
 app = Flask(__name__)
-app.secret_key = 'personal'
+app.secret_key = "personal"
 
 # Provide the parameters
 app.config["MAIL_SERVER"] = "smtp.gmail.com"
@@ -38,7 +38,8 @@ class Contact(db.Model):
     Name = db.Column(db.String(30), nullable=False)
     Email = db.Column(db.String(30), nullable=False)
     Message = db.Column(db.String(200), nullable=False)
-    
+
+
 class Post(db.Model):
     sno = db.Column(db.Integer, primary_key=True)
     Title = db.Column(db.String(30), nullable=False)
@@ -46,40 +47,41 @@ class Post(db.Model):
     sub_title = db.Column(db.String(100), nullable=False)
     Content = db.Column(db.String(200), nullable=False)
     img_file = db.Column(db.String(50), nullable=True)
-    Date = db.Column( nullable=True)
+    Date = db.Column(nullable=True)
 
 
 # Define the home route
 @app.route("/")
 def home():
     post = Post.query.filter_by().all()
-    return render_template("home.html", home=True, params=params, posts = post)
+    return render_template("home.html", home=True, params=params, posts=post)
+
 
 # Define the login route
-@app.route("/dashboard", methods = ["GET", "POST"])
+@app.route("/dashboard", methods=["GET", "POST"])
 def dashboard():
-    if 'user' in session and session['user'] == params["uname"]:
+    if "user" in session and session["user"] == params["uname"]:
         post = Post.query.all()
-        
-        return render_template('success.html', params = params,  posts = post)
+
+        return render_template("success.html", params=params, posts=post)
     if request.method == "POST":
         username = request.form.get("uname")
         password = request.form.get("password")
-        if username != params["uname"] and password != params['password']:
+        if username != params["uname"] or password != params["password"]:
             flash("Invalid Email or Password")
-            return render_template("login.html",params = params)
+            return render_template("login.html", params=params)
 
         else:
-            session['user'] = username
+            session["user"] = username
             post = Post.query.all()
-            return render_template("success.html",  params= params, posts = post)
-    return render_template("login.html", params= params)
+            return render_template("success.html", params=params, posts=post)
+    return render_template("login.html", params=params)
 
 
 # Define the post route
 @app.route("/post/<string:post_slug>")
 def post(post_slug):
-    post = Post.query.filter_by(slug = post_slug).first()
+    post = Post.query.filter_by(slug=post_slug).first()
     return render_template("post.html", params=params, post=post)
 
 
@@ -106,11 +108,23 @@ def contact():
             subject="New Message from QuillBlog",
             sender=contact_email,
             recipients=[params["gmail_user"]],
-            body = f"Message from QuillBlog\n From: {contact_email}\n Message: {contact_message}",
+            body=f"Message from QuillBlog\n From: {contact_email}\n Message: {contact_message}",
         )
         mail.send(msg)
         return redirect(url_for("contact"))
     return render_template("contact.html", params=params)
+
+
+@app.route("/edit/<string:post_sno>", methods=["GET", "POST"])
+def edit(post_sno):
+    if "user" in session and session["user"] == params["uname"]:
+        if request.method == "POST":
+            Title = request.form.get("title")
+            sub_title = request.form.get("sub_title")
+            Content = request.form.get("content")
+            img_file = request.form.get("img_file")
+            post = Post.query.filter_by(sno = post_sno).first()
+    return render_template("edit.html", params=params, )
 
 
 # Run the app in debug mode
