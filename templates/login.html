@@ -10,38 +10,33 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Sevillana&display=swap"
       rel="stylesheet">
-    <title>Login</title>
+    <title>Admin Panel</title>
   </head>
   <body>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
-    <div id="flash"
-      class="mt-12 mx-4 px-4 rounded-md border-l-4 border-green-500 bg-green-50 md:max-w-2xl md:mx-auto">
+    <div id="flash" class="mt-12 mx-4 px-4 rounded-md border-l-4 border-red-500 bg-red-50 md:max-w-2xl md:mx-auto">
       <div class="flex justify-between py-3">
         <div class="flex">
           <div>
-            <svg xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 rounded-full text-green-500" viewBox="0 0 20 20"
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500" viewBox="0 0 20 20"
               fill="currentColor">
               <path fillRule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
                 clipRule="evenodd" />
             </svg>
           </div>
           <div class="self-center ml-3">
-            <span class="text-green-600 font-semibold">
-              Success
+            <span class="text-red-600 font-semibold">
+              Error
             </span>
-            <p class="text-green-600 mt-1">
-              {{messages}}
+            <p class="text-red-600 mt-1">
+              Sorry something wrong happened, please enter a correct email.
             </p>
           </div>
         </div>
-        <button
-          onclick="document.getElementById('flash').style.display = 'none'"
-          class="self-start text-green-500">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
-            viewBox="0 0 20 20" fill="currentColor">
+        <button onclick="document.getElementById('flash').style.display='none'" class="self-start text-red-500">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
             <path fillRule="evenodd"
               d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
               clipRule="evenodd" />
@@ -100,10 +95,10 @@
           <form  class="space-y-5"
             action="/dashboard " method="POST">
             <div>
-              <label class="font-medium">Email</label>
+              <label class="font-medium">UserName</label>
               <input
-                type="email"
-                name="email"
+                type="text"
+                name="uname"
                 required
                 class="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg" />
             </div>
