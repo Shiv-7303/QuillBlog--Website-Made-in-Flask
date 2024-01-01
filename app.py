@@ -2,6 +2,9 @@
 from flask import Flask, render_template, session, url_for, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 import json
+import os
+from werkzeug.utils import secure_filename
+
 from flask_mail import Mail, Message
 from datetime import datetime
 
@@ -117,7 +120,7 @@ def contact():
 
 @app.route("/edit/<string:post_sno>", methods=["GET", "POST"])
 def edit(post_sno):
-    post = Post.query.filter_by(sno = post_sno).first()
+    post = Post.query.filter_by(sno=post_sno).first()
     if "user" in session and session["user"] == params["uname"]:
         if request.method == "POST":
             title = request.form.get("title")
@@ -133,13 +136,13 @@ def edit(post_sno):
                     sub_title=sub_title,
                     Content=content,
                     img_file=img_file,
-                    Date = date
+                    Date=date,
                 )
                 db.session.add(post)
                 db.session.commit()
                 return redirect("/dashboard")
             else:
-                post = Post.query.filter_by(sno = post_sno).first()
+                post = Post.query.filter_by(sno=post_sno).first()
                 post.Title = title
                 post.sub_title = sub_title
                 post.Title = title
@@ -149,9 +152,20 @@ def edit(post_sno):
                 post.Date = date
                 db.session.commit()
                 return redirect("/dashboard")
-                
-        return render_template("edit.html", params=params, sno=post_sno, post= post)
 
+        return render_template("edit.html", params=params, sno=post_sno, post=post)
+
+
+@app.route("/uploader", methods=["GET", "POST"])
+def uploader():
+    if "user" in session and session["user"] == params["uname"]:
+        if request.method == "POST":
+            try:
+                f = request.files["file1"]
+                f.save(os.path.join(params["upload_location"], secure_filename(f.filename)))
+                return "Uploaded Successfully"
+            except FileNotFoundError :
+                return "No file is choosen "
 
 # Run the app in debug mode
 if __name__ == "__main__":

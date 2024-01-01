@@ -8,6 +8,7 @@
         "gmail_user": "pythontut23@gmail.com",
         "gmail_password": "jovfzihgkwmhxvot",
         "uname":"nanki",
-        "password":"pgli"
+        "password":"pgli",
+        "upload_location":"K:\\Flask Blog\\static"
     }
 }
