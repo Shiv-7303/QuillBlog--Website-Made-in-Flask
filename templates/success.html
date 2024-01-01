@@ -90,10 +90,11 @@
                 </p>
                 <p style="font-family: 'Lora', serif;" class="text-xl">Ready
                     to create more blog's? Begin your journey..!</p>
-                <button style="font-family: 'Lora', serif;"
+                    <a href="/edit/0"> <button style="font-family: 'Lora', serif;"
                     class="shadow-inner rounded-lg transition-all hover:-translate-y-1 hover:scale-105 mt-4 px-4 py-3 bg-[#023047] text-white text-xl ">
                     Write new Post
-                </button>
+                </button></a>
+               
             </div>
 
             <div class="mb-4 ">
@@ -184,51 +185,7 @@
 
         </div>
     </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Function to toggle the modal visibility
-            function toggleModal() {
-                const modal = document.getElementById("crud-modal");
-                modal.classList.toggle("hidden");
-                document.body.classList.toggle("overflow-hidden");
-            }
-
-            // Find all modal toggle buttons
-            const modalToggleButtons = document.querySelectorAll("[data-modal-toggle]");
-
-            // Attach click event listeners to each modal toggle button
-            modalToggleButtons.forEach(function (button) {
-                button.addEventListener("click", function () {
-                    toggleModal();
-                });
-            });
-
-            // Close the modal when the close button is clicked
-            // Close the modal when the close button is clicked
-            const modalCloseButton = document.getElementById("crud-modal-close-button");
-            if (modalCloseButton) {
-                modalCloseButton.addEventListener("click", function (button) {
-                    toggleModal();
-                });
-            }
-
-
-            // Close the modal when the overlay outside the modal is clicked
-            const modalOverlay = document.getElementById("crud-modal");
-            modalOverlay.addEventListener("click", function (event) {
-                if (event.target === modalOverlay) {
-                    toggleModal();
-                }
-            });
-
-            // Close the modal when the 'Esc' key is pressed
-            document.addEventListener("keydown", function (event) {
-                if (event.key === "Escape") {
-                    toggleModal();
-                }
-            });
-        });
-    </script>
+   
 </body>
 
 </html>

@@ -15,7 +15,7 @@
   <body>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
-    <div id="flash" class="mt-12 mx-4 px-4 rounded-md border-l-4 border-red-500 bg-red-50 md:max-w-2xl md:mx-auto">
+    <div id="flash" class="mt-12 mx-4 px-4 rounded-md border-l-4 border-red-500 bg-gray-50  md:max-w-2xl md:mx-auto">
       <div class="flex justify-between py-3">
         <div class="flex">
           <div>
@@ -31,7 +31,7 @@
               Error
             </span>
             <p class="text-red-600 mt-1">
-              Sorry something wrong happened, please enter a correct email.
+              Sorry something wrong happened, please enter a correct email or Password.
             </p>
           </div>
         </div>
@@ -48,7 +48,7 @@
     {% endif %}
     {% endwith %}
     <main
-      class="w-full  flex flex-col items-center justify-center bg-gray-50 sm:px-4">
+      class="w-full  flex flex-col items-center justify-center  sm:px-4">
       <div class="w-full space-y-6 text-gray-600 sm:max-w-md">
         <div class="text-center">
 
@@ -123,7 +123,7 @@
       </div>
     </main>
   </body>
-  <footer class="w-full max-w-[85rem] bg-gray-50 px-4 sm:px-6 lg:px-8 mx-auto">
+  <footer class="w-full max-w-[85rem]  px-4 sm:px-6 lg:px-8 mx-auto">
     <!-- Grid -->
     <div class="text-center">
       <div>

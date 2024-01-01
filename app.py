@@ -117,14 +117,40 @@ def contact():
 
 @app.route("/edit/<string:post_sno>", methods=["GET", "POST"])
 def edit(post_sno):
+    post = Post.query.filter_by(sno = post_sno).first()
     if "user" in session and session["user"] == params["uname"]:
         if request.method == "POST":
-            Title = request.form.get("title")
+            title = request.form.get("title")
             sub_title = request.form.get("sub_title")
-            Content = request.form.get("content")
+            slug = request.form.get("slug")
+            content = request.form.get("content")
             img_file = request.form.get("img_file")
-            post = Post.query.filter_by(sno = post_sno).first()
-    return render_template("edit.html", params=params, )
+            date = datetime.now()
+            if post_sno == "0":
+                post = Post(
+                    Title=title,
+                    slug=slug,
+                    sub_title=sub_title,
+                    Content=content,
+                    img_file=img_file,
+                    Date = date
+                )
+                db.session.add(post)
+                db.session.commit()
+                return redirect("/dashboard")
+            else:
+                post = Post.query.filter_by(sno = post_sno).first()
+                post.Title = title
+                post.sub_title = sub_title
+                post.Title = title
+                post.slug = slug
+                post.Content = content
+                post.img_file = img_file
+                post.Date = date
+                db.session.commit()
+                return redirect("/dashboard")
+                
+        return render_template("edit.html", params=params, sno=post_sno, post= post)
 
 
 # Run the app in debug mode
