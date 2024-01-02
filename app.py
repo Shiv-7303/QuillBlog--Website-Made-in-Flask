@@ -1,4 +1,6 @@
 # Import necessary modules
+import math
+import time
 from flask import Flask, render_template, session, url_for, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 import json
@@ -57,7 +59,22 @@ class Post(db.Model):
 @app.route("/")
 def home():
     post = Post.query.filter_by().all()
-    return render_template("home.html", home=True, params=params, posts=post)
+    page = request.args.get('page')
+    last = math.ceil( len(post)/int(params['no_of_posts']))
+    if (not str(page).isnumeric()):
+        page = 1
+    page = int(page)
+    post = post[(page-1)*int(params['no_of_posts']):(page-1)*int(params['no_of_posts'])+int(params['no_of_posts'])]
+    if page==1:
+        prev = "#"
+        next = "/?page="+str(page+1)
+    elif page == last:
+        prev = "/?page="+str(page-1)
+        next = "#"
+    else:
+        prev = "/?page="+str(page-1)
+        next = "/?page="+str(page+1)
+    return render_template("home.html", home=True, params=params, posts=post, prev=prev, next=next)
 
 
 # Define the login route
@@ -166,6 +183,26 @@ def uploader():
                 return "Uploaded Successfully"
             except FileNotFoundError :
                 return "No file is choosen "
+
+
+
+
+
+@app.route("/logout")
+def logout():
+    session.pop('user')
+    return redirect("/dashboard")
+
+
+@app.route("/delete/<string:sno>", methods=["GET", "POST"])
+def delete(sno):
+    if "user" in session and session["user"] == params["uname"]:
+        post = Post.query.filter_by(sno = sno).first()
+        db.session.delete(post)
+        db.session.commit()
+        return redirect("/dashboard")
+
+
 
 # Run the app in debug mode
 if __name__ == "__main__":

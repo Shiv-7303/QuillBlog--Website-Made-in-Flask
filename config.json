@@ -9,6 +9,7 @@
         "gmail_password": "jovfzihgkwmhxvot",
         "uname":"nanki",
         "password":"pgli",
-        "upload_location":"K:\\Flask Blog\\static"
+        "upload_location":"K:\\Flask Blog\\static",
+        "no_of_posts" : 2
     }
 }
