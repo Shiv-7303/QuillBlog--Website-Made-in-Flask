@@ -60,6 +60,7 @@ class Post(db.Model):
 def home():
     post = Post.query.filter_by().all()
     page = request.args.get('page')
+    print(page)
     last = math.ceil( len(post)/int(params['no_of_posts']))
     if (not str(page).isnumeric()):
         page = 1
