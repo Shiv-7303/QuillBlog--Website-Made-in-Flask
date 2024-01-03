@@ -6,7 +6,6 @@
         "prod_uri": "mysql+pymysql://root:@localhost/quillblog",
         "blog_name":"Quillblog",
         "gmail_user": "pythontut23@gmail.com",
-        "gmail_password": "jovfzihgkwmhxvot",
         "uname":"nanki",
         "password":"pgli",
         "upload_location":"K:\\Flask Blog\\static",

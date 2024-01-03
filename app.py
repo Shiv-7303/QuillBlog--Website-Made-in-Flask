@@ -22,7 +22,7 @@ app.secret_key = "personal"
 app.config["MAIL_SERVER"] = "smtp.gmail.com"
 app.config["MAIL_PORT"] = 587
 app.config["MAIL_USE_TLS"] = True
-app.config["MAIL_PASSWORD"] = params["gmail_password"]
+app.config["MAIL_PASSWORD"] = os.environ.get("PYTHON_EMAIL_PASSWORD")
 app.config["MAIL_USERNAME"] = params["gmail_user"]
 # Initialize the Flask Mail
 mail = Mail(app)
@@ -116,6 +116,7 @@ def about():
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
+        flash("Sending..", "send")
         # Get the form data
         name = request.form.get("name")
         contact_email = request.form.get("email")
@@ -131,7 +132,11 @@ def contact():
             recipients=[params["gmail_user"]],
             body=f"Message from QuillBlog\n From: {contact_email}\n Message: {contact_message}",
         )
-        mail.send(msg)
+        try:
+            mail.send(msg)
+            flash("Message Sent..!", "success")
+        except:
+            flash("Something Error..!", "error")
         return redirect(url_for("contact"))
     return render_template("contact.html", params=params)
 
