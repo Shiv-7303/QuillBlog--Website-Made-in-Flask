@@ -116,7 +116,6 @@ def about():
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
-        flash("Sending..", "send")
         # Get the form data
         name = request.form.get("name")
         contact_email = request.form.get("email")
